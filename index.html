@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Про мене</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #000, #333);
+            text-align: center;
+            color: white;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+        img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+            transition: transform 0.5s;
+        }
+        img:hover {
+            transform: rotate(5deg) scale(1.1);
+        }
+        h1 {
+            font-size: 2.5em;
+            animation: fadeIn 2s ease-in-out;
+        }
+        p {
+            font-size: 1.2em;
+            animation: slideUp 2s ease-in-out;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #555;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+        .button:hover {
+            background: #777;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 5px;
+            border-radius: 5px;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        ul li:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(1.05);
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #333; /* Темно-сірий фон модалки */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            text-align: center;
+            animation: fadeIn 0.5s;
+            z-index: 10;
+        }
+        .modal-backdrop {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.3); /* Біло-прозорий фон бекдропа */
+            z-index: 5;
+        }
+        .modal button {
+            background: #777;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .modal button:hover {
+            background: #999;
+        }
+
+        .link {
+            
+            color: white;
+        }
+
+        .button:hover {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Привіт! Я веб-розробник</h1>
+        <img src="./img/image.jpg" alt="Фото" />
+        <p>Я займаюся створенням якісних та сучасних сайтів. Верстаю на HTML, CSS, використовую BEM, SASS. Роблю анімовані та адаптивні сайти.</p>
+        <p>Мої навички включають:</p>
+        <ul>
+            <li onclick="openSkillModal('Адаптивні сайти', 'Я створюю сайти, які чудово виглядають на будь-яких пристроях.')">Створення адаптивних сайтів</li>
+            <li onclick="openSkillModal('BEM', 'Застосовую методологію BEM для зручності та масштабованості коду.')">Верстка за методологією BEM</li>
+            <li onclick="openSkillModal('Анімації', 'Додаю цікаві анімації для покращення користувацького досвіду.')">Анімації та інтерфейси</li>
+            <li onclick="openSkillModal('Оптимізація', 'Оптимізую сайти для швидкого завантаження та високої продуктивності.')">Оптимізація швидкості завантаження</li>
+        </ul>
+        <button class="button" onclick="openModal()">Зв'язатися зі мною</button>
+    </div>
+    
+    <div id="backdrop" class="modal-backdrop" onclick="closeAllModals()"></div>
+    
+    <div id="contactModal" class="modal">
+        <p>Напишіть мені: <strong><a class="link" href="mailto:omelanenko2023@gmail.com">omelanenko2023@gmail.com</a> або <a class="link" href="mailto:dimaomelianenko40@gmail.com">dimaomelianenko40@gmail.com</a></strong></p>
+
+        <button onclick="closeModal()">Закрити</button>
+    </div>
+    
+    <div id="skillModal" class="modal">
+        <h2 id="skillTitle"></h2>
+        <p id="skillDescription"></p>
+        <button class="vut" onclick="closeSkillModal()">Закрити</button>
+    </div>
+    
+    <script>
+        function openModal() {
+            document.getElementById("contactModal").style.display = "block";
+            document.getElementById("backdrop").style.display = "block";
+        }
+        function closeModal() {
+            document.getElementById("contactModal").style.display = "none";
+            document.getElementById("backdrop").style.display = "none";
+        }
+        function openSkillModal(title, description) {
+            document.getElementById("skillTitle").textContent = title;
+            document.getElementById("skillDescription").textContent = description;
+            document.getElementById("skillModal").style.display = "block";
+            document.getElementById("backdrop").style.display = "block";
+        }
+        function closeSkillModal() {
+            document.getElementById("skillModal").style.display = "none";
+            document.getElementById("backdrop").style.display = "none";
+        }
+        function closeAllModals() {
+            closeModal();
+            closeSkillModal();
+        }
+    </script>
+</body>
+</html>
